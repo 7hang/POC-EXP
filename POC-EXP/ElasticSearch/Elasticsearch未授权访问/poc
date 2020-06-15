@@ -1,0 +1,6 @@
+安装了river之后可以同步多种数据库数据（包括关系型的mysql、mongodb等）。
+http://xxx:9200/_cat/indices 里面的indices包含了_river一般就是安装了river
+http://xxx:9200/_plugin/head/ web管理界面
+http://xxx:9200/_cat/indices
+http://xxx:9200/_river/_search 查看数据库敏感信息
+http://xxx:9200/_nodes 查看节点数据

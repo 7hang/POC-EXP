@@ -1,0 +1,1 @@
+/general/ipanel/user/user_info.php?UID=1&USER_ID=admin #uid加单引号报错

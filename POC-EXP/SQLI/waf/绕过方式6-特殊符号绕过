@@ -1,0 +1,5 @@
++ ` symbol: select `version()`;
++ +- :select+id-1+1.from users;
++ @:select@^1.from users;
++Mysql function() as xxx
++`、~、!、@、%、()、[]、.、-、+ 、|、%00

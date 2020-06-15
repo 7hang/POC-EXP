@@ -1,0 +1,3 @@
+正 常 访 问 http://www.test.com/ 跳 转 到
+http://www.test.com/home 。 当 我 们 特 殊 构 造 如 下 访 问 链 接 ：
+http://www.test.com//evil.com访问后跳转到http://evil.com/home

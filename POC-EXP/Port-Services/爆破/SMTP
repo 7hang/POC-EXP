@@ -1,0 +1,6 @@
+nmap IP -p25 --script=smtp-enum-users.nse --script-args=smtp-enum-
+users.methods={VRFY}   #爆破
+
+nmap -p 25 --script smtp-brute IP  #爆破
+
+nmap IP -p25 --script=smtp-open-relay.nse  #中继安全性测试

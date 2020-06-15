@@ -1,0 +1,19 @@
+hex()、bin() ==> ascii()
+ 
+sleep() ==>benchmark()
+ 
+concat_ws()==>group_concat()
+
+substr((select 'password'),1,1) = 0x70
+ 
+strcmp(left('password',1), 0x69) = 1
+ 
+strcmp(left('password',1), 0x70) = 0
+ 
+strcmp(left('password',1), 0x71) = -1
+
+mid()、substr() ==> substring()
+ 
+@@user ==> user()
+ 
+@@datadir ==> datadir()

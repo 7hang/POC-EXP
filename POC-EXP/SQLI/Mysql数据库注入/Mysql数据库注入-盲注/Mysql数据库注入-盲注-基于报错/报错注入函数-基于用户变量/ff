@@ -1,0 +1,2 @@
+select min(@a:=1) from information_schema.tables group by concat(database()
+,@a:=(@a+1)%2)

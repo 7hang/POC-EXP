@@ -1,0 +1,2 @@
+/general/data_center/model_design/design/report/list_report.php?repid=1&openmode=design&menu_id=1
+参数repid可注入，在repid参数后加入一个a，可爆出sql语句

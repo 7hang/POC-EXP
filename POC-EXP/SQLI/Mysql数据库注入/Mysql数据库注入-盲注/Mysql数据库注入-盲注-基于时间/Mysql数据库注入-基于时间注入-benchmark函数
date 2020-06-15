@@ -1,0 +1,1 @@
+if(1=1,benchmark(2000000,encode('hello','goodbye')),0)

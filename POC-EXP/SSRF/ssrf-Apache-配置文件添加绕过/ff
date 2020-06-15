@@ -1,0 +1,2 @@
+aaa.conf:
+AddHandler application/x-httpd-php.php

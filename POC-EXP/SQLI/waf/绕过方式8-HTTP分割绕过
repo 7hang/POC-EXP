@@ -1,0 +1,3 @@
+a=1+union/*&amp;b=*/select+1,pass/*&amp;c=*/from+users--
+ 
+　　select * from table where a=1 union/* and b=*/select 1,pass/* limit */from users—
