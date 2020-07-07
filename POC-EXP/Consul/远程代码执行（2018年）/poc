@@ -1,0 +1,5 @@
+常见端口：8500
+[host]:8500/v1/agent/self
+
+前置条件：
+EnableRemoteScriptChecks: true
