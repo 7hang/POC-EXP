@@ -1,0 +1,4 @@
+影响范围：
+Django 1.11.x < 1.11.28 Django 2.2.x < 2.2.10 Django 3.0.x < 3.0.3 Django 主开发分支
+
+#https://github.com/ianxtianxt/CVE-2020-7471
