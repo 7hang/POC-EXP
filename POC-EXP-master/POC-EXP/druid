@@ -1,0 +1,21 @@
+druid:
+账号： druid/admin
+密码： druid
+
+session未授权获取session进入后台，后台可能存在越权接口
+/druid/websession.html
+/system/druid/websession.html
+/webpage/system/druid/websession.html
+
+后台登陆接口
+/druid/login.html
+/system/druid/login.html
+/webpage/system/druid/login.html
+/webpage/system/druid/weburi.html
+
+
+CVE-2020-1958
+https://lists.apache.org/thread.html/r9d437371793b410f8a8e18f556d52d4bb68e18c537962f6a97f4945e%40%3Cdev.druid.apache.org%3E
+
+CVE-2021-25646  -登陆后getshell（普通用户权限）
+/druid/indexer/v1/sampler      https://blog.csdn.net/qq_37602797/article/details/113572312
