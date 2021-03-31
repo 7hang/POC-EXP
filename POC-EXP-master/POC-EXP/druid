@@ -1,6 +1,7 @@
 druid:
 账号： druid/admin
 密码： druid
+admin/admin
 
 session未授权获取session进入后台，后台可能存在越权接口
 /druid/websession.html
